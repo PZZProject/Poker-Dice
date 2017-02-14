@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour {
         }
         text.text = "Score:\n" + wynik;
         print(wynik);
-        if (wynik == temporary)
+        /*if (wynik == temporary)
         {
             licznik++;
         }
@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour {
                 Debug.Log("value= " + value + "  name =" + name + "  random =" + rand);
             }
             reader.Close();
-            reader = null;*/
+            reader = null;
             dbcmd.Dispose();
             dbcmd = null;
             dbconn.Close();
@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour {
         
         ///--------------------------------------
         wynik = 0;
-
+        */
         ///TODO
         /*foreach (var item in dieValues)     
         {
