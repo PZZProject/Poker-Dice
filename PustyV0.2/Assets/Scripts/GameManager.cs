@@ -7,9 +7,14 @@ using System.Data;
 
 
 public class GameManager : MonoBehaviour {
+    private bool IsActive=false;
+    public List<Vector3> rerollPosition;
+    public List<Quaternion> rerollRotaion;
     public List<GameObject> die;
     public List<Text> dieValues;
-    public GameObject btn;
+    public GameObject shootButton;
+    public GameObject rerollButton;
+    public GameObject timeManager;
     public Text text;
     public int wynik  { get; set; }
     public int currentValue { get; set; }
@@ -19,16 +24,30 @@ public class GameManager : MonoBehaviour {
     {
         wynik = 0;
         licznik = 0;
+        rerollButton.gameObject.SetActive(false);
+        shootButton.name = "Fire";
+        timeManager.gameObject.SetActive(false);
     }
 
     void Update()
     {
+        wynik = 0;
         foreach (var item in die)
         {
             wynik += item.GetComponent<DisplayCurrentDieValue>().currentValue;
         }
         text.text = "Score:\n" + wynik;
-        print(wynik);
+        if(timeManager.activeSelf)
+        {
+            IsActive = true;
+        }
+        if(IsActive==true && timeManager.activeSelf == false)
+        {
+            MoveDice();
+            IsActive = false;
+        }
+        #region CommentedBlock
+        //print(wynik);
         /*if (wynik == temporary)
         {
             licznik++;
@@ -69,12 +88,31 @@ public class GameManager : MonoBehaviour {
         /*foreach (var item in dieValues)     
         {
             item.text = "Die " + (dieValues.IndexOf(item) + 1) + " = " + die[dieValues.IndexOf(item)].GetComponent<DisplayCurrentDieValue>().currentValue;
-        }*/
+        }*/ 
+        #endregion
+
         foreach (var item in dieValues)
         {
             item.text = "Die " + (dieValues.IndexOf(item) + 1) + " = " + die[dieValues.IndexOf(item)].GetComponent<DisplayCurrentDieValue>().currentValue;
         }
     }   
 
+    public void MoveDice()
+    {
+        Rigidbody rb;
+        int value;
+        for(int i = 0; i < die.Count; i++)
+        {
+            die[i].transform.position = new Vector3(rerollPosition[i].x, rerollPosition[i].y, rerollPosition[i].z);
+            value = die[i].GetComponent<DisplayCurrentDieValue>().currentValue;
+            die[i].transform.rotation = Quaternion.Euler(rerollRotaion[value - 1].x, rerollRotaion[value - 1].y, rerollRotaion[value - 1].z);
+            rb = die[i].GetComponent<Rigidbody>();
+            rb.isKinematic = true;
+        }
+    }
 
+    public void TimerActivate()
+    {
+        timeManager.gameObject.SetActive(true);
+    }
 }

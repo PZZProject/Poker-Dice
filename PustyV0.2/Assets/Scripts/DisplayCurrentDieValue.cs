@@ -13,10 +13,6 @@ public class DisplayCurrentDieValue : MonoBehaviour {
         {
             currentValue = hit.collider.GetComponent<DieValue>().value;
         }
-        if (GetComponent<Rigidbody>().IsSleeping())
-        {
-            Debug.Log("Resting");
-        }
     }
     void OnGui()
     {
