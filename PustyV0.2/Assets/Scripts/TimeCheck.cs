@@ -2,7 +2,7 @@
 
 public class TimeCheck : MonoBehaviour {
     private float time= 8.0f;
-
+    //up
     void Update()
     {
         if (time < 0)
