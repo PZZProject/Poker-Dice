@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour {
     private Transform previous=null;
     private List<Transform> transList= new List<Transform>();
     private List<GameObject> inactiveDie= new List<GameObject>();
+    public Material defaultMaterial;
+    public Material shaderMaterial;
     public List<Vector3> rerollPosition;
     public List<Quaternion> rerollRotaion;
     public List<GameObject> die;
@@ -350,20 +352,24 @@ public class GameManager : MonoBehaviour {
             {
                 Ray ray = gameObject.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
+                Renderer rend;
                 if (Physics.Raycast(ray, out hit))
                 {
                     #region Switch
                     Transform selected = hit.transform;
+                    rend = selected.GetComponent<Renderer>();
                     switch (hit.transform.gameObject.tag)
                     {
                         case "Die":
                             if (transList.Contains(selected))
                             {
+                                rend.material = defaultMaterial;
                                 transList.Remove(selected);
                                 print("1 Deselected");
                             }
                             else
                             {
+                                rend.material = shaderMaterial;
                                 transList.Add(selected);
                                 print("1 Selected");
                             }
@@ -371,11 +377,13 @@ public class GameManager : MonoBehaviour {
                         case "Die 2":
                             if (transList.Contains(selected))
                             {
+                                rend.material = defaultMaterial;
                                 transList.Remove(selected);
                                 print("Die2 Deselected");
                             }
                             else
                             {
+                                rend.material = shaderMaterial;
                                 transList.Add(selected);
                                 print("Die2 Selected");
                             }
@@ -383,11 +391,13 @@ public class GameManager : MonoBehaviour {
                         case "Die 3":
                             if (transList.Contains(selected))
                             {
+                                rend.material = defaultMaterial;
                                 print("Die3 Deselected");
                                 transList.Remove(selected);
                             }
                             else
                             {
+                                rend.material = shaderMaterial;
                                 transList.Add(selected);
                                 print("Die3 Selected");
                             }
@@ -395,11 +405,13 @@ public class GameManager : MonoBehaviour {
                         case "Die 4":
                             if (transList.Contains(selected))
                             {
+                                rend.material = defaultMaterial;
                                 print("Die4 Deselected");
                                 transList.Remove(selected);
                             }
                             else
                             {
+                                rend.material = shaderMaterial;
                                 transList.Add(selected);
                                 print("Die4 Selected");
                             }
@@ -407,11 +419,13 @@ public class GameManager : MonoBehaviour {
                         case "Die 5":
                             if (transList.Contains(selected))
                             {
+                                rend.material = defaultMaterial;
                                 print("Die5 Deselected");
                                 transList.Remove(selected);
                             }
                             else
                             {
+                                rend.material = shaderMaterial;
                                 transList.Add(selected);
                                 print("Die5 Selected");
                             }
@@ -434,6 +448,7 @@ public class GameManager : MonoBehaviour {
     public void Reroll()
     {
         Rigidbody rb;
+        SetDefault();
         diceMoved = false;
         for (int i = 0; i < transList.Count; i++)
         {
@@ -471,5 +486,15 @@ public class GameManager : MonoBehaviour {
     private void DropSelect()
     {
         transList.Clear();
+    }
+
+    private void SetDefault()
+    {
+        Renderer rend;
+        foreach (GameObject element in die)
+        {
+            rend = element.GetComponent<Renderer>();
+            rend.material = defaultMaterial;
+        }
     }
 }
