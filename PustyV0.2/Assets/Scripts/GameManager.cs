@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
-
+using System;
 
 public class GameManager : MonoBehaviour {
     #region Variables
@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour {
     public List<Quaternion> rerollRotaion;
     public List<GameObject> die;
     public List<Text> dieValues;
+    public List<Button> formButtons;
+    public List<Text> formScores;
     public GameObject shootButton;
     public GameObject rerollButton;
     public GameObject timeManager;
@@ -23,6 +25,7 @@ public class GameManager : MonoBehaviour {
     public int currentValue { get; set; }
     public int licznik { get; set; }
     public int temporary { get; set; } 
+
     #endregion
     void Start()
     { 
@@ -36,6 +39,29 @@ public class GameManager : MonoBehaviour {
 
     void Update()
     {
+        #region test
+        temporary = 0;
+        int sum1 = 0;
+        int sum2 = 0;
+        foreach (var item in die)
+        {
+            temporary += item.GetComponent<DisplayCurrentDieValue>().currentValue;
+        }
+        foreach (var item in formButtons)
+        {
+            item.GetComponentInChildren<Text>().text = temporary.ToString();
+        }
+        for (int i = 0; i < 13; i++)
+        {
+            sum1 += Int32.Parse(formButtons[i].GetComponentInChildren<Text>().text);
+        }
+        for (int i = 13; i < 26; i++)
+        {
+            sum2 += Int32.Parse(formButtons[i].GetComponentInChildren<Text>().text);
+        }
+        formScores[0].text = sum1.ToString();
+        formScores[1].text = sum2.ToString();
+        #endregion
         wynik = 0;
         OnMouseClick();
         CheckTime();
