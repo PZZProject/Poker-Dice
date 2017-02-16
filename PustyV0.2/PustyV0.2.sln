@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PustyV0.2.CSharp", "PustyV0.2.CSharp.csproj", "{9120EF68-B3C3-D4A1-EB8F-2A2DB5077B4F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PustyV0.2", "PustyV0.2.csproj", "{0861CB3B-7BEC-629F-CA71-BA4473A7EDFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +9,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9120EF68-B3C3-D4A1-EB8F-2A2DB5077B4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9120EF68-B3C3-D4A1-EB8F-2A2DB5077B4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9120EF68-B3C3-D4A1-EB8F-2A2DB5077B4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9120EF68-B3C3-D4A1-EB8F-2A2DB5077B4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0861CB3B-7BEC-629F-CA71-BA4473A7EDFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0861CB3B-7BEC-629F-CA71-BA4473A7EDFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0861CB3B-7BEC-629F-CA71-BA4473A7EDFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0861CB3B-7BEC-629F-CA71-BA4473A7EDFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
