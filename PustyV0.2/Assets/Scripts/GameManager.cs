@@ -171,6 +171,33 @@ public class GameManager : MonoBehaviour {
                 formButtons[6].GetComponentInChildren<Text>().text = (3 * (i + 1)).ToString();
             }
         }
+        //Quad Button
+        for (int i = 0; i < numberOfDiscardedMesh.Length; i++)
+        {
+            if (numberOfDiscardedMesh[i] > 3)
+            {
+                formButtons[6].GetComponentInChildren<Text>().text = (4 * (i + 1)).ToString();
+            }
+        }
+        //FullHouse Button
+        int fullthree = 0;
+        int fulltwo = 0;
+        for (int i = 0; i < numberOfDiscardedMesh.Length; i++)
+        {
+            if (numberOfDiscardedMesh[i] == 3)
+            {
+                fullthree = 3 * (i + 1);
+            }
+            if (numberOfDiscardedMesh[i] == 2)
+            {
+                fulltwo = 2 * (i + 1);
+            }
+        }
+        if (fullthree > 0 && fulltwo > 0)
+        {
+            formButtons[7].GetComponentInChildren<Text>().text = (fullthree + fulltwo).ToString();
+        }
+        //Small street
     }
 
     public void UpdatingSums()
