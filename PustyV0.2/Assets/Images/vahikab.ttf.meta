@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: fa8c5f5b1358c4d4f929be4c37d4f5fd
+timeCreated: 1487266870
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Vahika
+  fontNames:
+  - Vahika
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
