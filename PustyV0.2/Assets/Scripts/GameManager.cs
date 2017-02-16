@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour {
         shootButton.name = "Fire";
     }
 
-    void Update()
+    void FixedUpdate()
     {
         #region test
         /*temporary = 0;
@@ -169,6 +169,11 @@ public class GameManager : MonoBehaviour {
             if (numberOfDiscardedMesh[i] > 2)
             {
                 formButtons[6].GetComponentInChildren<Text>().text = (3 * (i + 1)).ToString();
+                break;
+            }
+            else
+            {
+                formButtons[6].GetComponentInChildren<Text>().text = 0.ToString();
             }
         }
         //Quad Button
@@ -176,7 +181,12 @@ public class GameManager : MonoBehaviour {
         {
             if (numberOfDiscardedMesh[i] > 3)
             {
-                formButtons[6].GetComponentInChildren<Text>().text = (4 * (i + 1)).ToString();
+                formButtons[7].GetComponentInChildren<Text>().text = (4 * (i + 1)).ToString();
+                break;
+            }
+            else
+            {
+                formButtons[7].GetComponentInChildren<Text>().text = 0.ToString();
             }
         }
         //FullHouse Button
@@ -195,9 +205,77 @@ public class GameManager : MonoBehaviour {
         }
         if (fullthree > 0 && fulltwo > 0)
         {
-            formButtons[7].GetComponentInChildren<Text>().text = (fullthree + fulltwo).ToString();
+            formButtons[8].GetComponentInChildren<Text>().text = (fullthree + fulltwo + 5).ToString();
+            playerOneValues[8] = fullthree + fulltwo + 5;
+        }
+        else
+        {
+            formButtons[8].GetComponentInChildren<Text>().text = 0.ToString();
+            playerOneValues[8] = fullthree + fulltwo + 5;
         }
         //Small street
+        bool existSmallStreet = true;
+        for (int i = 0; i < numberOfDiscardedMesh.Length - 1; i++)
+        {
+            if (numberOfDiscardedMesh[i] != 1)
+            {
+                existSmallStreet = false;
+            }
+
+        }
+        if (existSmallStreet)
+        {
+            formButtons[9].GetComponentInChildren<Text>().text = 25.ToString();
+            playerOneValues[9] = 25;
+        }
+        else
+        {
+            formButtons[9].GetComponentInChildren<Text>().text = 0.ToString();
+            playerOneValues[9] = 0;
+        }
+        //Full street
+        bool existFullStreet = true;
+        for (int i = 1; i < numberOfDiscardedMesh.Length; i++)
+        {
+            if (numberOfDiscardedMesh[i] != 1)
+            {
+                existFullStreet = false;
+            }
+
+        }
+        if (existFullStreet)
+        {
+            formButtons[10].GetComponentInChildren<Text>().text = 30.ToString();
+            playerOneValues[10] = 30;
+        }
+        else
+        {
+            formButtons[10].GetComponentInChildren<Text>().text = 0.ToString();
+            playerOneValues[10] = 0;
+        }
+        //General
+        for (int i = 0; i < numberOfDiscardedMesh.Length; i++)
+        {
+            if (numberOfDiscardedMesh[i] > 4)
+            {
+                formButtons[11].GetComponentInChildren<Text>().text = (5 * (i + 1) + 15).ToString();
+                playerOneValues[11] = 5 * (i + 1) + 15;
+                break;
+            }
+            else
+            {
+                formButtons[11].GetComponentInChildren<Text>().text = 0.ToString();
+                playerOneValues[11] = 0;
+            }
+        }
+        //Chance
+        int chance = 0;
+        for (int i = 0; i < numberOfDiscardedMesh.Length; i++)
+        {
+            chance += numberOfDiscardedMesh[i] * (i + 1);
+        }
+        formButtons[12].GetComponentInChildren<Text>().text = chance.ToString();
+        playerOneValues[12] = chance;
     }
 
     public void UpdatingSums()

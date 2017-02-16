@@ -1,0 +1,7 @@
+Triple *3 + 3
+Quad *4 + 6
+FullHouse *2 + *3 + 5
+SmallStreet +15 + 10
+FullStreet +20 + 10
+General *5 + 15
+Chance suma oczek
