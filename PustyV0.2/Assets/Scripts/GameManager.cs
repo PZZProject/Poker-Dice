@@ -30,8 +30,8 @@ public class GameManager : MonoBehaviour {
     public int temporary { get; set; }
     public int sum1;
     public int sum2;
-
     #endregion
+
     void Start()
     { 
         wynik = 0;
@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour {
         shootButton.name = "Fire";
     }
 
-    void FixedUpdate()
+    void Update()
     {
         #region test
         /*temporary = 0;
@@ -335,6 +335,8 @@ public class GameManager : MonoBehaviour {
         if (IsActive == true && timeManager.activeSelf == false)
         {
             MoveDice();
+            ShowDice();
+            DropSelect();
             IsActive = false;
         }
     }
@@ -357,7 +359,6 @@ public class GameManager : MonoBehaviour {
                         case "Die":
                             if (transList.Contains(selected))
                             {
-                                selected.gameObject.SetActive(false);
                                 transList.Remove(selected);
                                 print("1 Deselected");
                             }
@@ -423,8 +424,8 @@ public class GameManager : MonoBehaviour {
                     else
                     {
                         rerollButton.gameObject.SetActive(false);
-                    } 
-                    #endregion                    
+                    }
+                    #endregion
                 }
             }
         }
@@ -433,8 +434,9 @@ public class GameManager : MonoBehaviour {
     public void Reroll()
     {
         Rigidbody rb;
+        diceMoved = false;
         for (int i = 0; i < transList.Count; i++)
-        {   
+        {
             foreach (GameObject element in die)
             {
                 if (element.transform == transList[i])
@@ -444,13 +446,30 @@ public class GameManager : MonoBehaviour {
                 }
             }
         }
-        foreach(GameObject element in die)
+        foreach (GameObject element in die)
         {
             rb = element.GetComponent<Rigidbody>();
-            if(rb.isKinematic == true)
+            if (rb.isKinematic == true)
             {
                 element.gameObject.SetActive(false);
             }
         }
+        rerollButton.gameObject.SetActive(false);
+        rerollText.gameObject.SetActive(false);
+        shootButton.gameObject.SetActive(true);
+
+    }
+
+    private void ShowDice()
+    {
+        foreach(GameObject element in die)
+        {
+            element.gameObject.SetActive(true);
+        }
+    }
+
+    private void DropSelect()
+    {
+        transList.Clear();
     }
 }

@@ -9,6 +9,7 @@ public class TimeCheck : MonoBehaviour {
         {
             print("Time elapsed");
             this.gameObject.SetActive(false);
+            time = 8.0f;
         }
         time -= Time.deltaTime;
     }
