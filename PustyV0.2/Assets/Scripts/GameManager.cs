@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour {
     public List<Text> dieValues;
     public List<Button> formButtons;
     public List<Text> formScores;
+    public int[] numberOfDiscardedMesh;
+    public int[] playerOneValues;
+    public int[] playerTwoValues;
     public GameObject shootButton;
     public GameObject rerollButton;
     public GameObject timeManager;
@@ -24,7 +27,9 @@ public class GameManager : MonoBehaviour {
     public int wynik { get; set; }
     public int currentValue { get; set; }
     public int licznik { get; set; }
-    public int temporary { get; set; } 
+    public int temporary { get; set; }
+    public int sum1;
+    public int sum2;
 
     #endregion
     void Start()
@@ -40,9 +45,7 @@ public class GameManager : MonoBehaviour {
     void Update()
     {
         #region test
-        temporary = 0;
-        int sum1 = 0;
-        int sum2 = 0;
+        /*temporary = 0;
         foreach (var item in die)
         {
             temporary += item.GetComponent<DisplayCurrentDieValue>().currentValue;
@@ -50,19 +53,12 @@ public class GameManager : MonoBehaviour {
         foreach (var item in formButtons)
         {
             item.GetComponentInChildren<Text>().text = temporary.ToString();
-        }
-        for (int i = 0; i < 13; i++)
-        {
-            sum1 += Int32.Parse(formButtons[i].GetComponentInChildren<Text>().text);
-        }
-        for (int i = 13; i < 26; i++)
-        {
-            sum2 += Int32.Parse(formButtons[i].GetComponentInChildren<Text>().text);
-        }
-        formScores[0].text = sum1.ToString();
-        formScores[1].text = sum2.ToString();
+        }*/
         #endregion
+        UpdatingArray();
+        CheckingFigures();
         wynik = 0;
+        UpdatingSums();
         OnMouseClick();
         CheckTime();
         PrintScore();
@@ -111,6 +107,86 @@ public class GameManager : MonoBehaviour {
         }*/
         #endregion  
     }   
+
+    public void UpdatingArray()
+    {
+        for (int i = 0; i < numberOfDiscardedMesh.Length; i++)
+        {
+            numberOfDiscardedMesh[i] = 0;
+        }
+
+        foreach (var item in die)
+        {
+            switch (item.GetComponent<DisplayCurrentDieValue>().currentValue)
+            {
+                case 1:
+                    numberOfDiscardedMesh[0]++;
+                    break;
+                case 2:
+                    numberOfDiscardedMesh[1]++;
+                    break;
+                case 3:
+                    numberOfDiscardedMesh[2]++;
+                    break;
+                case 4:
+                    numberOfDiscardedMesh[3]++;
+                    break;
+                case 5:
+                    numberOfDiscardedMesh[4]++;
+                    break;
+                case 6:
+                    numberOfDiscardedMesh[5]++;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    public void CheckingFigures()
+    {
+        // One Button
+        formButtons[0].GetComponentInChildren<Text>().text = numberOfDiscardedMesh[0].ToString();
+        playerOneValues[0] = numberOfDiscardedMesh[0];
+        //Two Button
+        formButtons[1].GetComponentInChildren<Text>().text = (numberOfDiscardedMesh[1] * 2).ToString();
+        playerOneValues[1] = numberOfDiscardedMesh[1] * 2;
+        //Three Button
+        formButtons[2].GetComponentInChildren<Text>().text = (numberOfDiscardedMesh[2] * 3).ToString();
+        playerOneValues[2] = numberOfDiscardedMesh[2] * 3;
+        //Four Button
+        formButtons[3].GetComponentInChildren<Text>().text = (numberOfDiscardedMesh[3] * 4).ToString();
+        playerOneValues[3] = numberOfDiscardedMesh[3] * 4;
+        //Five Button
+        formButtons[4].GetComponentInChildren<Text>().text = (numberOfDiscardedMesh[4] * 5).ToString();
+        playerOneValues[4] = numberOfDiscardedMesh[4] * 5;
+        //Six Button
+        formButtons[5].GetComponentInChildren<Text>().text = (numberOfDiscardedMesh[5] * 6).ToString();
+        playerOneValues[5] = numberOfDiscardedMesh[5] * 6;
+        //Triple Button
+        for (int i = 0; i < numberOfDiscardedMesh.Length; i++)
+        {
+            if (numberOfDiscardedMesh[i] > 2)
+            {
+                formButtons[6].GetComponentInChildren<Text>().text = (3 * (i + 1)).ToString();
+            }
+        }
+    }
+
+    public void UpdatingSums()
+    {
+        sum1 = sum2 = 0;
+        for (int i = 0; i < 13; i++)
+        {
+            sum1 += Int32.Parse(formButtons[i].GetComponentInChildren<Text>().text);
+        }
+        for (int i = 13; i < 26; i++)
+        {
+            sum2 += Int32.Parse(formButtons[i].GetComponentInChildren<Text>().text);
+        }
+        formScores[0].text = sum1.ToString();
+        formScores[1].text = sum2.ToString();
+    }
 
     public void MoveDice()
     {
